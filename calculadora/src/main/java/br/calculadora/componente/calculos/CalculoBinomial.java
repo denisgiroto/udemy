@@ -12,12 +12,12 @@ import br.calculadora.componente.outras.Fatorial;
 
 public class CalculoBinomial extends Calculo{
 	
-	MemoriaDeValor qtdElementosExitente;
-	MemoriaDeValor numElementosGrupo;
+	MemoriaDeValor m;
+	MemoriaDeValor n;
 	
 	public CalculoBinomial(BigDecimal qtdExitente,BigDecimal numGrupo) {
-		qtdElementosExitente = new MemoriaDeValor(qtdExitente);
-		numElementosGrupo = new MemoriaDeValor(numGrupo);
+		m = new MemoriaDeValor(qtdExitente);
+		n = new MemoriaDeValor(numGrupo);
 	}
 	
 	public void montaCalculo() {
@@ -25,24 +25,27 @@ public class CalculoBinomial extends Calculo{
 		 * m!/n!(m-n)!
 		 * 
 		 */
+		MemoriaDeValor dividendo =  new MemoriaDeValor( m.getValor() );
+		MemoriaDeValor divisor =  new MemoriaDeValor(  n.getValor() );
+		MemoriaDeValor subMn =  new MemoriaDeValor( m.getValor()  );
 		
 		//Aux M
-		MemoriaDeValor resultado =  new MemoriaDeValor( qtdElementosExitente.getValor()  );
+		//MemoriaDeValor fatorialM =  new MemoriaDeValor( m.getValor()  );
 		//Aux N
-		MemoriaDeValor fatElementosGrupo =  new MemoriaDeValor( numElementosGrupo.getValor() );
+		MemoriaDeValor fatElementosGrupo =  new MemoriaDeValor( n.getValor() );
 		
 		//m!
-		registraComponente(new Fatorial(resultado));
+		registraComponente(new Fatorial(dividendo));
 		//n!
-		registraComponente(new Fatorial(fatElementosGrupo));
+		registraComponente(new Fatorial(divisor));
 		// (m-n)
-		registraComponente(new Subtracao(qtdElementosExitente,numElementosGrupo));
+		registraComponente(new Subtracao(subMn,n));
 		// (m-n)!
-		registraComponente(new Fatorial( qtdElementosExitente ));
+		registraComponente(new Fatorial( subMn ));
 		//n!(m-n)!
-		registraComponente(new Multiplicacao(fatElementosGrupo,qtdElementosExitente));
+		registraComponente(new Multiplicacao(divisor, subMn));
 		//m!/n!(m-n)!
-		registraComponente(new Divisao(resultado,fatElementosGrupo));
+		registraComponente(new Divisao(dividendo, divisor));
 		
 		/*
 		setMemoriaDoResultado(
