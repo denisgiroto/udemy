@@ -1,30 +1,46 @@
 package br.calculadora.componente.fundamental;
 
+import java.math.BigDecimal;
+
 import br.calculadora.MemoriaDeValor;
 
 
 public class Divisao extends FundamentalBase {
 
+	private MemoriaDeValor divisor;
+	private MemoriaDeValor dividendo;
+    
     public Divisao(
         MemoriaDeValor memoriaDoResultado,
-        MemoriaDeValor memoriaDoValor1,
-        MemoriaDeValor memoriaDoValor2) {
-        super(memoriaDoResultado, memoriaDoValor1, memoriaDoValor2);
+        MemoriaDeValor divisor) {
+        
+    	super(memoriaDoResultado );
+        
+        this.divisor = divisor;
+        this.dividendo = memoriaDoResultado;
     }
 
     public Divisao(
         MemoriaDeValor memoriaDoResultado,
-        MemoriaDeValor memoriaDoValor1,
-        MemoriaDeValor memoriaDoValor2,
+        MemoriaDeValor divisor,
         int scala,
         int modoDeArredondamento) {
-        super(memoriaDoResultado, memoriaDoValor1, memoriaDoValor2, scala, modoDeArredondamento);
+        
+    	super(memoriaDoResultado, scala, modoDeArredondamento);
+        
+        this.divisor = divisor;
+        this.dividendo = memoriaDoResultado;
     }
 
     public void doAplica() {
-        armazenaResultado(
-        	divide(recuperaValor1(), recuperaValor2())
-        	.setScale(getScala(),getModoDeArredondamento())
-        );
+    	
+    	BigDecimal dividendo 	= this.dividendo.getValor();
+    	BigDecimal divisor 		= this.divisor.getValor();
+    	
+    	armazenaValor(
+    			
+    			dividendo.divide(divisor )
+    	
+    	);
     }
 }

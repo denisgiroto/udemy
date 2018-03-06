@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import br.calculadora.Decorator;
+import br.calculadora.Calculadora;
 import br.calculadora.Fracao;
 import br.calculadora.MemoriaDeValor;
 
 
 
-public class FracaoBase extends Decorator {
+public class FracaoBase extends Calculadora {
     
     private MemoriaDeValor memoriaDoValor1;
     private MemoriaDeValor memoriaDoValor2;

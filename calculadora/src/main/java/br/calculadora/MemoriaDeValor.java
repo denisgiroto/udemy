@@ -2,10 +2,27 @@ package br.calculadora;
 
 import java.math.BigDecimal;
 
-public class MemoriaDeValor extends OperacoesMatematicas{
+public class MemoriaDeValor {
 	
 	private BigDecimal valor;
 	private Fracao fracao;
+
+
+	public MemoriaDeValor(BigDecimal valor) {
+		super();
+		setValor(valor);
+	}
+    
+    public MemoriaDeValor(Fracao valor) {
+        super();
+        setFracao(valor);
+    }
+
+	
+	public MemoriaDeValor() {
+		super();
+		setValor(BigDecimal.ZERO);
+	}
 
 	public Fracao getFracao() {
         return this.fracao;
@@ -23,45 +40,10 @@ public class MemoriaDeValor extends OperacoesMatematicas{
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
-
-	public MemoriaDeValor(BigDecimal valor) {
-		super();
-		setValor(valor);
-	}
-    
-    public MemoriaDeValor(Fracao valor) {
-        super();
-        setFracao(valor);
-    }
-
+	
 	public String toString() {
 		return getValor().toString();
 	}
 
-	public MemoriaDeValor() {
-		super();
-		setValor(new BigDecimal(0));
-	}
-
-	public void reseta() {
-		setValor(new BigDecimal(0));
-	}
-	
-	public boolean isPositivo() {
-		return getValor().compareTo(getValorZERO()) > 0;
-	}
-	
-	public boolean isNegativo() {
-		return getValor().compareTo(getValorZERO()) < 0;
-	}
-	
-	public boolean isZERO() {
-		return getValor().compareTo(getValorZERO())==0;
-	}
-	
-	public void setScala(int scala,int modoArredondamento) {
-		setValor(getValor().setScale(scala,modoArredondamento));
-	}
-	
 	
 }

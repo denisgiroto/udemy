@@ -1,30 +1,47 @@
 package br.calculadora.componente.fundamental;
 
+import java.math.BigDecimal;
+
 import br.calculadora.MemoriaDeValor;
 
 
 public class Multiplicacao extends FundamentalBase {
 
+	MemoriaDeValor fator1, fator2;
+    
     public Multiplicacao(
         MemoriaDeValor memoriaDoResultado,
-        MemoriaDeValor memoriaDoValor1,
-        MemoriaDeValor memoriaDoValor2) {
-        super(memoriaDoResultado, memoriaDoValor1, memoriaDoValor2);
+        MemoriaDeValor fator) {
+    	
+        super(memoriaDoResultado);
+        
+        this.fator1 = memoriaDoResultado;
+        this.fator2 = fator;
     }
 
     public Multiplicacao(
         MemoriaDeValor memoriaDoResultado,
-        MemoriaDeValor memoriaDoValor1,
-        MemoriaDeValor memoriaDoValor2,
+        MemoriaDeValor fator,
         int scala,
         int modoDeArredondamento) {
-        super(memoriaDoResultado, memoriaDoValor1, memoriaDoValor2, scala, modoDeArredondamento);
+        super(memoriaDoResultado, scala, modoDeArredondamento);
+        
+        this.fator1 = memoriaDoResultado;
+        this.fator2 = fator;
     }
 
     public void doAplica() {
-        armazenaResultado(
-        		multiplica(recuperaValor1(), recuperaValor2())
-        		.setScale(getScala(),getModoDeArredondamento())
-        );
+    	
+    	BigDecimal fator1 = this.fator1.getValor();
+    	BigDecimal fator2 = this.fator2.getValor();
+    	
+    	armazenaValor(
+    			
+    			fator1.multiply(fator2)
+    			
+    			
+       );
+    	
+        
     }
 }

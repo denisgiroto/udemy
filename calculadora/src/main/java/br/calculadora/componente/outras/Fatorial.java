@@ -2,52 +2,41 @@ package br.calculadora.componente.outras;
 
 import java.math.BigDecimal;
 
-import br.calculadora.Decorator;
+import br.calculadora.Calculadora;
 import br.calculadora.MemoriaDeValor;
+import br.calculadora.componente.fundamental.FundamentalBase;
 
 
 
 
-public class Fatorial extends Decorator {
-	private MemoriaDeValor memoriaDoFatorial;
+public class Fatorial extends FundamentalBase {
+	
+	private MemoriaDeValor valor;
 
-	public MemoriaDeValor getMemoriaDoFatorial() {
-		return this.memoriaDoFatorial;
-	}
-
-	public void setMemoriaDoFatorial(MemoriaDeValor percentual) {
-		this.memoriaDoFatorial = percentual;
-	}
-
-	public Fatorial(
-		MemoriaDeValor memoriaDoResultado,
-		MemoriaDeValor fatorial) {
-		super();
-		setMemoriaDoResultado(memoriaDoResultado);
-		setMemoriaDoFatorial(fatorial);
+	public Fatorial(MemoriaDeValor memoriaDoResultado) {
+		super(memoriaDoResultado);
+		
+		this.valor = memoriaDoResultado;
 	}
 	
-	public BigDecimal fatorial(BigDecimal num){
-		if (num.longValueExact() == 0){ 
-			return new BigDecimal(1);
-		}
-		return num.multiply(fatorial(num.subtract(new BigDecimal(1))));
-	}
 	
-	public BigDecimal fatorial2(BigDecimal num){
-		BigDecimal resposta = new BigDecimal(1);
-		for (long i = 1; i <= num.longValue(); i++) {
-			resposta = resposta.multiply(new BigDecimal(i));
+	public long fatorial(long num){
+		long resposta = 1;
+		for (long i = 1; i <= num; i++) {
+			resposta = resposta * i;
 		}
 		return resposta;
 	}
 	
 	public void doAplica() {
-		if(getMemoriaDoFatorial().getValor().intValue()<20 && getMemoriaDoFatorial().getValor().intValue()>-20){
-			armazenaResultado(fatorial(getMemoriaDoFatorial().getValor()));
-		}else{
-			armazenaResultado(fatorial2(getMemoriaDoFatorial().getValor()));
-		}
+		
+		long valor = this.valor.getValor().longValue();
+		
+		armazenaValor(
+				
+				new BigDecimal( fatorial(valor) )
+		);
+		
 	}
 	
 

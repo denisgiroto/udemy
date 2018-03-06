@@ -3,7 +3,6 @@ package br.calculadora.componente.calculos;
 import java.math.BigDecimal;
 
 import br.calculadora.Calculo;
-import br.calculadora.ComponenteCalculo;
 import br.calculadora.MemoriaDeValor;
 import br.calculadora.componente.fundamental.Divisao;
 import br.calculadora.componente.fundamental.Multiplicacao;
@@ -12,6 +11,7 @@ import br.calculadora.componente.outras.Fatorial;
 
 
 public class CalculoBinomial extends Calculo{
+	
 	MemoriaDeValor qtdElementosExitente;
 	MemoriaDeValor numElementosGrupo;
 	
@@ -27,28 +27,39 @@ public class CalculoBinomial extends Calculo{
 		 */
 		
 		//Aux M
-		MemoriaDeValor fatElementosExitente =  new MemoriaDeValor(new BigDecimal(0));
+		MemoriaDeValor resultado =  new MemoriaDeValor( qtdElementosExitente.getValor()  );
 		//Aux N
-		MemoriaDeValor fatElementosGrupo =  new MemoriaDeValor(new BigDecimal(0));
+		MemoriaDeValor fatElementosGrupo =  new MemoriaDeValor( numElementosGrupo.getValor() );
 		
 		//m!
-		registraComponente(new Fatorial(fatElementosExitente,qtdElementosExitente));
+		registraComponente(new Fatorial(resultado));
 		//n!
-		registraComponente(new Fatorial(fatElementosGrupo,numElementosGrupo));
+		registraComponente(new Fatorial(fatElementosGrupo));
 		// (m-n)
-		registraComponente(new Subtracao(getResultado(),qtdElementosExitente,numElementosGrupo));
+		registraComponente(new Subtracao(qtdElementosExitente,numElementosGrupo));
 		// (m-n)!
-		registraComponente(new Fatorial(getResultado(),getResultado()));
+		registraComponente(new Fatorial( qtdElementosExitente ));
 		//n!(m-n)!
-		registraComponente(new Multiplicacao(getResultado(),fatElementosGrupo,getResultado()));
+		registraComponente(new Multiplicacao(fatElementosGrupo,qtdElementosExitente));
 		//m!/n!(m-n)!
-		registraComponente(new Divisao(getResultado(),fatElementosExitente,getResultado()));
+		registraComponente(new Divisao(resultado,fatElementosGrupo));
+		
+		/*
+		setMemoriaDoResultado(
+				new Divisao(
+							new Fatorial(resultado).getResultado(), 
+							new Multiplicacao(
+											  new Fatorial(fatElementosGrupo).getResultado(),
+											  new Fatorial( 
+													  		new Subtracao(qtdElementosExitente, numElementosGrupo)
+													  		.getResultado() 
+													  	   ).getResultado()
+											  ).getResultado()
+							).getResultado()
+				
+		);
+		*/
 	}
 	
-	public static void main(String[] args) {
-		ComponenteCalculo c = new CalculoBinomial(new BigDecimal(8),new BigDecimal(6));
-		c.aplica();
-		System.out.println(c.recuperaResultado());
-	}
-	
+
 }
