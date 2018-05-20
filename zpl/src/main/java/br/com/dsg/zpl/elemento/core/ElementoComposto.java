@@ -27,8 +27,11 @@ public abstract class ElementoComposto extends Elemento{
 	
 
 	public ElementoComposto registra(Elemento componente) {
-		System.out.println(this.getClass().getSimpleName()+"::registra(componente) "+componente.getClass().getName());
-		getComponentes().add(componente);
+		//System.out.println(this.getClass().getSimpleName()+"::registra(componente) "+componente.getClass().getName());
+		if(componente!=null) {
+			
+			getComponentes().add(componente);
+		}
 		return this;
 	}
 

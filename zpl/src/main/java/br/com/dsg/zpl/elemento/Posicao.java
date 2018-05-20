@@ -29,5 +29,14 @@ public class Posicao extends ElementoComposto{
 						new Valor(vertical, new ConversorMilimetrosParaPontos()) )
 				);
 	}
+
+	public int getHorizontal() {
+		return horizontal;
+	}
+
+	public int getVertical() {
+		return vertical;
+	}
+	
 	
 }

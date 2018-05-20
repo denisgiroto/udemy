@@ -3,7 +3,6 @@ package br.com.dsg.zpl.elemento;
 import br.com.dsg.zpl.elemento.conversor.ConversorMilimetrosParaPontos;
 import br.com.dsg.zpl.elemento.core.ComandoGeral;
 import br.com.dsg.zpl.elemento.core.ComandoSimples;
-import br.com.dsg.zpl.elemento.core.Parametros;
 
 /**
  * @author denisgiroto

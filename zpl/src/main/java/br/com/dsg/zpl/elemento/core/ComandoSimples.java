@@ -45,6 +45,10 @@ public abstract class ComandoSimples extends ElementoComposto{
 		//System.out.println("elemento "+this.valor+ "^FS");
 		return elemento+ "^FS";
 	}
+
+	protected Posicao getPosicao() {
+		return posicao;
+	}
 	
 	
 

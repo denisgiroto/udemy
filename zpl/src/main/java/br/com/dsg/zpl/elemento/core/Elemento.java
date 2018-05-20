@@ -7,7 +7,7 @@ package br.com.dsg.zpl.elemento.core;
 public abstract class Elemento {
 
 	
-	private Parametros parametros = new Parametros(8, 70);
+	private Parametros parametros = new Parametros(8, 70, 150);
 	
 	
 	public Elemento() {
