@@ -1,6 +1,8 @@
-package br.com.dsg.zpl.elemento.core;
+package br.com.dsg.zpl.elemento;
 
-import br.com.dsg.zpl.elemento.Posicao;
+import br.com.dsg.zpl.elemento.core.ComandoGeral;
+import br.com.dsg.zpl.elemento.core.ElementoComposto;
+import br.com.dsg.zpl.elemento.core.Parametros;
 
 /**
  * @author denisgiroto

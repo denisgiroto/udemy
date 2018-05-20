@@ -22,7 +22,7 @@ public class Fonte extends ElementoComposto{
 		registra(
 				new ComandoGeral("^CF", 
 						new Valor("0"),
-						new Valor(tamanho, new ConversorMilimetrosParaPontos()) )
+						new Valor(tamanho, true) )
 				);
 	}
 	

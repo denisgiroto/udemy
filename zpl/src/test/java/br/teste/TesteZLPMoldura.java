@@ -6,11 +6,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import br.com.dsg.zpl.ZPL;
-import br.com.dsg.zpl.elemento.CampoAlfanumerico;
-import br.com.dsg.zpl.elemento.Fonte;
 import br.com.dsg.zpl.elemento.Moldura;
 import br.com.dsg.zpl.elemento.Posicao;
+import br.com.dsg.zpl.elemento.core.Densidade;
+import br.com.dsg.zpl.elemento.core.Dimensao;
+import br.com.dsg.zpl.elemento.core.UnidadeMedida;
+import br.com.dsg.zpl.elemento.core.ZPLBuilder;
 import junit.framework.Assert;
 
 public class TesteZLPMoldura {
@@ -35,8 +36,8 @@ public class TesteZLPMoldura {
 	
 	@Test
 	public void testlinha() {
-		String valor = ZPL.novaPagina(12, 70,150)
-				.registra(new Moldura(new Posicao(10, 10), 30,5,1,"B")
+		String valor = ZPLBuilder.novaPagina(UnidadeMedida.MILIMETROS,Densidade.DOZE_PONTOS, 70, 150)
+				.registra(new Moldura(new Posicao(10, 10),new Dimensao(30, 5),1)
 						)
 				.escrever();
 

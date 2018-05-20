@@ -6,43 +6,42 @@ package br.com.dsg.zpl.elemento.core;
  */
 public class Parametros {
 
-	private int densidade = 6;
-	private int largura = 70;
-	private int altura = 70;
-	/**
-	 * @param densidade 6,8 ou 12
-	 * @param largura milimetro
-	 */
-	public Parametros(int densidade, int largura, int altura) {
+	private UnidadeMedida unidadeMedida = UnidadeMedida.PONTOS;
+	private Densidade densidade;
+	private Dimensao dimensao;
+	
+
+	public Parametros(UnidadeMedida unidadeMedida, Densidade densidade, Dimensao dimensao) {
 		super();
+		this.unidadeMedida = unidadeMedida;
 		this.densidade = densidade;
-		this.largura = largura;
-		this.altura = altura;
+		this.dimensao = dimensao;
 	}
 
-	public int getDensidade() {
+	public Densidade getDensidade() {
 		return densidade;
 	}
 
-	public int getLargura() {
-		return largura;
+	public Dimensao getDimensao() {
+		return dimensao;
 	}
 
-	public int getAltura() {
-		return altura;
+	public UnidadeMedida getUnidadeMedida() {
+		return unidadeMedida;
 	}
 
-	void setDensidade(int densidade) {
+	void setUnidadeMedida(UnidadeMedida unidadeMedida) {
+		this.unidadeMedida = unidadeMedida;
+	}
+
+	void setDensidade(Densidade densidade) {
 		this.densidade = densidade;
 	}
 
-	void setLargura(int largura) {
-		this.largura = largura;
+	void setDimensao(Dimensao dimensao) {
+		this.dimensao = dimensao;
 	}
 
-	void setAltura(int altura) {
-		this.altura = altura;
-	}
-
+	
 	
 }

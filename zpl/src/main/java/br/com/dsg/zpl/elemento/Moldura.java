@@ -2,7 +2,8 @@ package br.com.dsg.zpl.elemento;
 
 import br.com.dsg.zpl.elemento.conversor.ConversorMilimetrosParaPontos;
 import br.com.dsg.zpl.elemento.core.ComandoGeral;
-import br.com.dsg.zpl.elemento.core.ComandoSimples;
+import br.com.dsg.zpl.elemento.core.Cor;
+import br.com.dsg.zpl.elemento.core.Dimensao;
 
 /**
  * @author denisgiroto
@@ -13,45 +14,47 @@ public class Moldura extends ComandoSimples {
 
 	private ComandoGeral comandoGeral = new ComandoGeral("^GB");
 
-	private Integer largura;
-	private Integer altura;
-	private Integer larguraCorFundo;
-	private String corFundo;
-
-
+	private Dimensao dimensao;
+	private int  larguraCorFundo;
+	private Cor   corFundo = Cor.B;
 
 	/**
 	 * @param posicao
-	 * @param altura
-	 * @param largura
+	 * @param dimensao
 	 * @param larguraCorFundo
-	 * @param corFundo W ou B
+	 * @param corFundo
 	 */
-	public Moldura(Posicao posicao, Integer largura, Integer altura,Integer larguraCorFundo, String corFundo) {
+	public Moldura(Posicao posicao, Dimensao dimensao, int larguraCorFundo, Cor corFundo) {
 		super(posicao);
-		this.largura = largura;
-		this.altura = altura;
+		this.dimensao = dimensao;
 		this.larguraCorFundo = larguraCorFundo;
-		this.corFundo = corFundo;
+		if(corFundo!=null) {
+			
+			this.corFundo = corFundo;
+		}
 	}
 
-	
+	/**
+	 * @param posicao
+	 * @param dimensao
+	 * @param larguraCorFundo
+	 */
+	public Moldura(Posicao posicao, Dimensao dimensao, int larguraCorFundo) {
+		this(posicao, dimensao, larguraCorFundo, Cor.B);
+	}
 
 	@Override
 	protected void montaCampo() {
 
-		comandoGeral.comValor(largura.toString(), new ConversorMilimetrosParaPontos());
-		comandoGeral.comValor(altura.toString(), new ConversorMilimetrosParaPontos());
+		comandoGeral.comValor(this.dimensao);
 		
-		if( larguraCorFundo>altura && larguraCorFundo>largura) {
-			if(altura<largura) {
-				larguraCorFundo=altura;
-			}else {
-				larguraCorFundo=largura;
-			}
+		if(  ! this.dimensao.validaValor( larguraCorFundo ) ) {
+			
+			larguraCorFundo = this.dimensao.valorMenorSentido();
 		}
-		comandoGeral.comValor(larguraCorFundo.toString(), new ConversorMilimetrosParaPontos());
-		comandoGeral.comValor(corFundo);
+		
+		comandoGeral.comValor( larguraCorFundo, getParametros().getUnidadeMedida().getConversor());
+		comandoGeral.comValor( corFundo.name() );
 		
 		registra(comandoGeral);
 		

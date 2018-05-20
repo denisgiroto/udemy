@@ -7,24 +7,33 @@ package br.com.dsg.zpl.elemento.core;
 public abstract class Elemento {
 
 	
-	private Parametros parametros = new Parametros(8, 70, 150);
+	private Parametros parametros;
 	
 	
 	public Elemento() {
 		super();
+	//this.parametros = new Parametros(UnidadeMedida.PONTOS, Densidade.OITO_PONTOS, new Dimensao(800, 1000));
+	}
+	
+	public Elemento(Parametros parametros) {
+		super();
+		this.parametros = parametros;
 	}
 
 
-	public Elemento(Parametros parametros ) {
+	void setParametro( Parametros parametros ) {
 		this.parametros = parametros;
 	}
 	
 	
 	public String escrever() {
-		//System.out.println("Elemento::escrever");
 		return escrever(this.parametros);
 	}
 	
 	
+	protected Parametros getParametros() {
+		return parametros;
+	}
+
 	public abstract String escrever(Parametros parametros);
 }

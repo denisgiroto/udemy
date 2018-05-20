@@ -22,16 +22,40 @@ public class ComandoGeral extends Elemento {
 		this.comando = comando;
 	}
 
+	public ComandoGeral comValor(Dimensao dimensao) {
+		if(valores == null) {
+			this.valores = new ArrayList<Valor>();
+		}
+		this.valores.add(new Valor(dimensao.getLargura(), true ));
+		this.valores.add(new Valor(dimensao.getAltura() , true ));
+		return this;
+	}
 	
 	public ComandoGeral comValor(String valor, Conversor conversor) {
 		if(valores == null) {
 			this.valores = new ArrayList<Valor>();
 		}
-		this.valores.add(new Valor(valor, conversor));
+		this.valores.add(new Valor(valor,false, conversor));
+		return this;
+	}
+	
+	public ComandoGeral comValor(int valor, Conversor conversor) {
+		if(valores == null) {
+			this.valores = new ArrayList<Valor>();
+		}
+		this.valores.add(new Valor(valor,false, conversor));
 		return this;
 	}
 	
 	public ComandoGeral comValor(String valor) {
+		if(valores == null) {
+			this.valores = new ArrayList<Valor>();
+		}
+		this.valores.add(new Valor(valor));
+		return this;
+	}
+	
+	public ComandoGeral comValor(int valor) {
 		if(valores == null) {
 			this.valores = new ArrayList<Valor>();
 		}

@@ -6,10 +6,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import br.com.dsg.zpl.ZPL;
-import br.com.dsg.zpl.elemento.CampoAlfanumerico;
-import br.com.dsg.zpl.elemento.Fonte;
-import br.com.dsg.zpl.elemento.Posicao;
+import br.com.dsg.zpl.elemento.core.Densidade;
+import br.com.dsg.zpl.elemento.core.UnidadeMedida;
+import br.com.dsg.zpl.elemento.core.ZPLBuilder;
 import junit.framework.Assert;
 
 public class TesteZLPPagina {
@@ -32,7 +31,7 @@ public class TesteZLPPagina {
 
 	@Test
 	public void testPagina() {
-		String valor = ZPL.novaPagina(12, 70, 150)
+		String valor = ZPLBuilder.novaPagina(UnidadeMedida.MILIMETROS,Densidade.DOZE_PONTOS, 70, 150)
 				.escrever();
 
 		System.out.println(valor);
@@ -41,7 +40,7 @@ public class TesteZLPPagina {
 	
 	@Test
 	public void testPaginaMoldura() {
-		String valor = ZPL.novaPagina(12, 99, 150)
+		String valor = ZPLBuilder.novaPagina(UnidadeMedida.MILIMETROS,Densidade.DOZE_PONTOS, 99, 150)
 				.comMargem()
 				.escrever();
 

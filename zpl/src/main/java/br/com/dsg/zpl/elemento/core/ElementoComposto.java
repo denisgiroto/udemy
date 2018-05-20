@@ -14,6 +14,10 @@ public abstract class ElementoComposto extends Elemento{
 	public ElementoComposto() {
 		super();
 	}
+	
+	public ElementoComposto(Parametros parametros) {
+		super(parametros);
+	}
 
 	public List<Elemento> getComponentes() {
 		if (this.componentes == null) {
@@ -29,7 +33,7 @@ public abstract class ElementoComposto extends Elemento{
 	public ElementoComposto registra(Elemento componente) {
 		//System.out.println(this.getClass().getSimpleName()+"::registra(componente) "+componente.getClass().getName());
 		if(componente!=null) {
-			
+			componente.setParametro(getParametros());
 			getComponentes().add(componente);
 		}
 		return this;

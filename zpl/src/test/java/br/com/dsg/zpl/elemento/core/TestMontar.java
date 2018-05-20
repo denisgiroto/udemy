@@ -1,19 +1,19 @@
-package br.teste;
+package br.com.dsg.zpl.elemento.core;
 
-import br.com.dsg.zpl.ZPL;
 import br.com.dsg.zpl.elemento.CaixaTexto;
 import br.com.dsg.zpl.elemento.Posicao;
-import br.com.dsg.zpl.elemento.core.Pagina;
 
 public class TestMontar {
 
 	public static void main(String[] args) {
 		((Pagina) 
-				ZPL
-				.novaPagina(12, 99, 110)
+				ZPLBuilder
+				
+				.novaPagina(UnidadeMedida.MILIMETROS,Densidade.OITO_PONTOS, 99, 110)
 				.comMargem()
-				.registra(new CaixaTexto(new Posicao(10, 10), "A", "N", "4", "3", "DeS","S","tva")
-						)
+				.registra(
+						new CaixaTexto(new Posicao(10, 10),new Dimensao(3, 4), "A", "N", "DeS","S","tva")
+				)
 				
 
 		).test();

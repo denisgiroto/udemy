@@ -1,6 +1,5 @@
 package br.com.dsg.zpl.elemento;
 
-import br.com.dsg.zpl.elemento.conversor.ConversorMilimetrosParaPontos;
 import br.com.dsg.zpl.elemento.core.ComandoGeral;
 import br.com.dsg.zpl.elemento.core.ElementoComposto;
 import br.com.dsg.zpl.elemento.core.Valor;
@@ -25,8 +24,8 @@ public class Posicao extends ElementoComposto{
 	protected void montaElemento() {
 		registra(
 				new ComandoGeral("^FO", 
-						new Valor(horizontal, new ConversorMilimetrosParaPontos()) ,
-						new Valor(vertical, new ConversorMilimetrosParaPontos()) )
+						new Valor(horizontal, true),
+						new Valor(vertical,   true ))
 				);
 	}
 

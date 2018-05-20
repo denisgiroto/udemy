@@ -2,7 +2,7 @@ package br.com.dsg.zpl.elemento;
 
 import br.com.dsg.zpl.elemento.conversor.ConversorMilimetrosParaPontos;
 import br.com.dsg.zpl.elemento.core.ComandoGeral;
-import br.com.dsg.zpl.elemento.core.ComandoSimples;
+import br.com.dsg.zpl.elemento.core.Dimensao;
 
 /**
  * @author denisgiroto
@@ -14,8 +14,7 @@ public class CampoAlfanumerico extends ComandoSimples {
 
 	private String tipoFonte;
 	private String rotacao;
-	private String altura;
-	private String largura;
+	private Dimensao dimensao;
 	private String valor;
 
 	public CampoAlfanumerico(Posicao posicao, String valor) {
@@ -23,13 +22,12 @@ public class CampoAlfanumerico extends ComandoSimples {
 		this.valor = valor;
 	}
 
-	public CampoAlfanumerico(Posicao posicao, String tipoFonte, String rotacao, String altura, String largura,
+	public CampoAlfanumerico(Posicao posicao, Dimensao dimensao, String tipoFonte, String rotacao,
 			String valor) {
 		super(posicao);
 		this.tipoFonte = tipoFonte;
 		this.rotacao = rotacao;
-		this.altura = altura;
-		this.largura = largura;
+		this.dimensao = dimensao;
 		this.valor = valor;
 	}
 
@@ -46,9 +44,8 @@ public class CampoAlfanumerico extends ComandoSimples {
 		return this;
 	}
 
-	public CampoAlfanumerico comDimensao(String altura, String largura) {
-		this.altura = altura;
-		this.largura = largura;
+	public CampoAlfanumerico comDimensao(Dimensao dimensao) {
+		this.dimensao = dimensao;
 		return this;
 	}
 
@@ -58,12 +55,11 @@ public class CampoAlfanumerico extends ComandoSimples {
 		if (tipoFonte != null && rotacao != null)
 			comandoGeral.comValor(tipoFonte + rotacao);
 		
-		if (altura != null)
-			comandoGeral.comValor(altura, new ConversorMilimetrosParaPontos());
-		if (largura != null)
-			comandoGeral.comValor(largura, new ConversorMilimetrosParaPontos());
+		if (dimensao != null)
+			comandoGeral.comValor(dimensao);
 		
 		registra(comandoGeral);
+		
 		registra(
 				new ComandoGeral("^FD")
 				.comValor(this.valor) 
