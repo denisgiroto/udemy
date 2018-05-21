@@ -60,6 +60,7 @@ public class Pagina extends ElementoComposto{
 	
 	public void test() {
 		String zpl = escrever();
+		System.out.println(zpl.replace("^", "\n^"));
 		Browser.get(this.getParametros().getDensidade(), zpl);
 	}
 

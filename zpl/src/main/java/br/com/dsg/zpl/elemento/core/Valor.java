@@ -19,6 +19,9 @@ public class Valor {
 	 */
 	public Valor(String valor, boolean converterUnidade, Conversor conversor) {
 		super();
+		if(valor==null || valor.isEmpty()) {
+			throw new RuntimeException();
+		}
 		this.valor = valor;
 		this.converterUnidade = converterUnidade;
 		this.conversor = conversor;
@@ -68,14 +71,19 @@ public class Valor {
 	}
 
 	protected String get(Parametros parametros) {
-		String novoValor = "";
+		
+		Valor clone = new Valor(this.valor, converterUnidade, conversor);
+		
 		if(converterUnidade) {
-			novoValor = parametros.getUnidadeMedida().getConversor().converter(this, parametros);
+			
+			clone.valor = parametros.getUnidadeMedida().getConversor().converter(this, parametros);
 		}
+		
 		if(conversor!=null) {
-			novoValor = this.conversor.converter(new Valor(novoValor,converterUnidade,conversor), parametros);
+		
+			clone.valor = this.conversor.converter(clone, parametros);
 		}
-		return novoValor;
+		return clone.valor;
 	}
 	
 	

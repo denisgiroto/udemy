@@ -15,6 +15,10 @@ public class Posicao extends ElementoComposto{
 	private int horizontal;
 	private int vertical;
 	
+	/**
+	 * @param horizontal
+	 * @param vertical
+	 */
 	public Posicao( int horizontal,int vertical) {
 		this.horizontal=horizontal;
 		this.vertical=vertical;

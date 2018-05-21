@@ -2,6 +2,7 @@ package br.teste;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -11,9 +12,11 @@ import br.com.dsg.zpl.elemento.Fonte;
 import br.com.dsg.zpl.elemento.Posicao;
 import br.com.dsg.zpl.elemento.core.Densidade;
 import br.com.dsg.zpl.elemento.core.Dimensao;
+import br.com.dsg.zpl.elemento.core.Rotacao;
+import br.com.dsg.zpl.elemento.core.TipoFonte;
 import br.com.dsg.zpl.elemento.core.UnidadeMedida;
 import br.com.dsg.zpl.elemento.core.ZPLBuilder;
-import junit.framework.Assert;
+
 
 public class TesteZLP {
 
@@ -37,7 +40,7 @@ public class TesteZLP {
 
 	@Test
 	public void testFonte() {
-		String valor = ZPLBuilder.novaPagina(UnidadeMedida.MILIMETROS,Densidade.DOZE_PONTOS, 70, 150)
+		String valor = ZPLBuilder.novaPagina(UnidadeMedida.MILIMETROS,Densidade.OITO_PONTOS, 70, 150)
 				.registra(new Fonte(12))
 				.escrever();
 
@@ -48,9 +51,9 @@ public class TesteZLP {
 
 	@Test
 	public void testAlfa() {
-		String valor = ZPLBuilder.novaPagina(UnidadeMedida.MILIMETROS,Densidade.DOZE_PONTOS, 70, 150)
+		String valor = ZPLBuilder.novaPagina(UnidadeMedida.MILIMETROS,Densidade.OITO_PONTOS, 70, 150)
 				.registra(new CampoAlfanumerico(new Posicao(10, 10), "Denis Giroto")
-						.comRotacao("A", "I"))
+						.comRotacao(TipoFonte.A, Rotacao.I))
 				.escrever();
 
 		System.out.println(valor);
@@ -63,20 +66,20 @@ public class TesteZLP {
 		Dimensao dimensao = new Dimensao(10, 10);
 		
 		String valor = ZPLBuilder
-				.novaPagina(UnidadeMedida.MILIMETROS,Densidade.DOZE_PONTOS, 70, 150)
+				.novaPagina(UnidadeMedida.MILIMETROS,Densidade.OITO_PONTOS, 70, 150)
 				
 				.registra(new Fonte(12))
 				.registra(new CampoAlfanumerico(new Posicao(10, 10), "D")
-						.comRotacao("A", "N")
+						.comRotacao(TipoFonte.A, Rotacao.N)
 						.comDimensao(dimensao))
 				.registra(new CampoAlfanumerico(new Posicao(21, 10), "E")
-						.comRotacao("A", "N")
+						.comRotacao(TipoFonte.A, Rotacao.N)
 						.comDimensao(dimensao))
 				.registra(new CampoAlfanumerico(new Posicao(32, 10), "N")
-						.comRotacao("A", "N")
+						.comRotacao(TipoFonte.A, Rotacao.N)
 						.comDimensao(dimensao))
 				.registra(new CampoAlfanumerico(new Posicao(43, 10), "I")
-						.comRotacao("A", "N")
+						.comRotacao(TipoFonte.A, Rotacao.N)
 						.comDimensao(dimensao))
 				.escrever();
 

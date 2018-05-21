@@ -1,6 +1,8 @@
 package br.com.dsg.zpl.elemento;
 
 import br.com.dsg.zpl.elemento.core.Dimensao;
+import br.com.dsg.zpl.elemento.core.Rotacao;
+import br.com.dsg.zpl.elemento.core.TipoFonte;
 
 /**
  * @author denisgiroto
@@ -9,10 +11,7 @@ import br.com.dsg.zpl.elemento.core.Dimensao;
 public class CaixaTexto extends ComandoSimples {
 
 
-	private String tipoFonte;
-	private String rotacao;
-	private Dimensao dimensaoCaractere;
-	private String[] valor;
+	private Linha[] valor;
 
 	
 
@@ -24,12 +23,8 @@ public class CaixaTexto extends ComandoSimples {
 	 * @param largura
 	 * @param valor
 	 */
-	public CaixaTexto(Posicao posicao, Dimensao dimensaoCaractere, String tipoFonte, String rotacao,
-			String... valor) {
+	public CaixaTexto(Posicao posicao, Linha... valor) {
 		super(posicao);
-		this.tipoFonte = tipoFonte;
-		this.rotacao = rotacao;
-		this.dimensaoCaractere = dimensaoCaractere;
 		this.valor = valor;
 	}
 
@@ -39,41 +34,52 @@ public class CaixaTexto extends ComandoSimples {
 	protected void montaCampo() {
 
 		
-		int margemY = 0;
 		int margemX = 0;
+		int margemY = 0;
 		
 		int proximoY = getPosicao().getVertical();
-		for (int index = 0; index < valor.length; index++) {
+		
+		Dimensao maiorDimensao = null;
+		
+		for (int l = 0; l < valor.length; l++) {
+			Linha linha = valor[l];
 			
-			String linha = valor[index];
+			
 			int proximoX = getPosicao().getHorizontal();
 			
-			for (int i = 0; i < linha.length(); i++) {
-				String caractere = linha.charAt(i)+"";
+			for (int c = 0; c < linha.getTexto().length(); c++) {
+				String caractere = linha.getTexto().charAt(c)+"";
+				
+				
 				
 				
 				registra(new CampoAlfanumerico(
 							new Posicao(proximoX, proximoY), 
-							dimensaoCaractere, tipoFonte, rotacao, caractere) );
+							linha.getDimensaoCaractere(), linha.getTipoFonte(), linha.getRotacao(), caractere) );
 				
 				
-				if(i<linha.length()-1)
-					proximoX += getPosicao().getHorizontal() ;
-			}
-			if(proximoX>margemX) {
-				margemX = proximoX;
+				
+				
+				proximoX += linha.getDimensaoCaractere().getLargura() ;
+				
+				int larguraLinha = linha.getDimensaoCaractere().getLargura() * linha.getTexto().length();
+				if(maiorDimensao==null | margemX< larguraLinha ) {
+					maiorDimensao = linha.getDimensaoCaractere();
+					margemX = larguraLinha;
+				}
+			
 			}
 			
-			if(index< valor.length-1)
-				proximoY +=getPosicao().getVertical();
+			proximoY +=linha.getDimensaoCaractere().getAltura()+2;
 		}
-		margemY = proximoY ;
+		
+		margemY = proximoY-getPosicao().getVertical();//(dimensaoCaractere.getAltura()+2) * valor.length;
 		
 		registra(
 				new Moldura(
-						new Posicao(getPosicao().getHorizontal()-2, getPosicao().getVertical()-2),
-						new Dimensao( margemX, margemY ),
-						1) 
+						new Posicao(getPosicao().getHorizontal()-1, getPosicao().getVertical()-2),
+						new Dimensao( margemX+2, margemY+2 ),
+						0) 
 		);
 
 	}
