@@ -2,7 +2,6 @@ package br.com.dsg.zpl.elemento.core;
 
 import br.com.dsg.zpl.elemento.Moldura;
 import br.com.dsg.zpl.elemento.Posicao;
-import br.com.dsg.zpl.elemento.conversor.ConversorMilimetrosParaPontos;
 
 /**
  * @author denisgiroto
@@ -13,6 +12,8 @@ public class Pagina extends ElementoComposto{
 
 	
 	private Boolean margem = Boolean.FALSE;
+	
+	private GerenciadorElemento listaElemento = new GerenciadorElemento(null);
 	
 	public Pagina() {
 		super();
@@ -35,8 +36,8 @@ public class Pagina extends ElementoComposto{
 	}
 
 	@Override
-	protected void montaElemento() {
-		registra(
+	protected void montaElemento(GerenciadorElemento gerenciador) {
+		gerenciador.registra(
 			new ComandoGeral(
 					"^LL", 
 					new Valor(
@@ -48,12 +49,16 @@ public class Pagina extends ElementoComposto{
 		
 		if(margem) {
 			
-			registra(
+			gerenciador.registra(
 				new Moldura(
 						new Posicao(1, 1), 
 						this.getParametros().getDimensao(), 
 						1)
 			);
+		}
+		
+		for (Elemento elemento : listaElemento.getComponentes()) {
+			gerenciador.registra(elemento);
 		}
 			
 	}
@@ -62,6 +67,12 @@ public class Pagina extends ElementoComposto{
 		String zpl = escrever();
 		System.out.println(zpl.replace("^", "\n^"));
 		Browser.get(this.getParametros().getDensidade(), zpl);
+	}
+
+	
+	public Pagina registra(Elemento elemento) {
+		listaElemento.registra(elemento);
+		return this;
 	}
 
 }

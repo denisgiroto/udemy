@@ -1,9 +1,9 @@
 package br.com.dsg.zpl.elemento;
 
-import br.com.dsg.zpl.elemento.conversor.ConversorMilimetrosParaPontos;
 import br.com.dsg.zpl.elemento.core.ComandoGeral;
 import br.com.dsg.zpl.elemento.core.Cor;
 import br.com.dsg.zpl.elemento.core.Dimensao;
+import br.com.dsg.zpl.elemento.core.GerenciadorElemento;
 
 /**
  * @author denisgiroto
@@ -44,7 +44,7 @@ public class Moldura extends ComandoSimples {
 	}
 
 	@Override
-	protected void montaCampo() {
+	protected void montaCampo(GerenciadorElemento gerenciador) {
 
 		comandoGeral.comValor(this.dimensao);
 		
@@ -56,7 +56,7 @@ public class Moldura extends ComandoSimples {
 		comandoGeral.comValor( larguraCorFundo, getParametros().getUnidadeMedida().getConversor());
 		comandoGeral.comValor( corFundo.name() );
 		
-		registra(comandoGeral);
+		gerenciador.registra(comandoGeral);
 		
 
 	}

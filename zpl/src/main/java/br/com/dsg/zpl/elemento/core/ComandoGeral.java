@@ -72,7 +72,7 @@ public class ComandoGeral extends Elemento {
 	}
 
 	@Override
-	public String escrever(Parametros parametros) {
+	protected String escrever(Parametros parametros) {
 		
 		//System.out.println("ComandoGeral::escrever(parametros)");
 		String elemento = "";

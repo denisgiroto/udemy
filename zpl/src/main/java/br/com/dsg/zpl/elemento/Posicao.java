@@ -2,6 +2,7 @@ package br.com.dsg.zpl.elemento;
 
 import br.com.dsg.zpl.elemento.core.ComandoGeral;
 import br.com.dsg.zpl.elemento.core.ElementoComposto;
+import br.com.dsg.zpl.elemento.core.GerenciadorElemento;
 import br.com.dsg.zpl.elemento.core.Valor;
 
 /**
@@ -25,8 +26,8 @@ public class Posicao extends ElementoComposto{
 	}
 
 	@Override
-	protected void montaElemento() {
-		registra(
+	protected void montaElemento(GerenciadorElemento gerenciador) {
+		gerenciador.registra(
 				new ComandoGeral("^FO", 
 						new Valor(horizontal, true),
 						new Valor(vertical,   true ))

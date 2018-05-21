@@ -1,8 +1,7 @@
 package br.com.dsg.zpl.elemento;
 
 import br.com.dsg.zpl.elemento.core.Dimensao;
-import br.com.dsg.zpl.elemento.core.Rotacao;
-import br.com.dsg.zpl.elemento.core.TipoFonte;
+import br.com.dsg.zpl.elemento.core.GerenciadorElemento;
 
 /**
  * @author denisgiroto
@@ -31,7 +30,7 @@ public class CaixaTexto extends ComandoSimples {
 	
 
 	@Override
-	protected void montaCampo() {
+	protected void montaCampo(GerenciadorElemento gerenciador) {
 
 		
 		int margemX = 0;
@@ -53,7 +52,7 @@ public class CaixaTexto extends ComandoSimples {
 				
 				
 				
-				registra(new CampoAlfanumerico(
+				gerenciador.registra(new CampoAlfanumerico(
 							new Posicao(proximoX, proximoY), 
 							linha.getDimensaoCaractere(), linha.getTipoFonte(), linha.getRotacao(), caractere) );
 				
@@ -75,7 +74,7 @@ public class CaixaTexto extends ComandoSimples {
 		
 		margemY = proximoY-getPosicao().getVertical();//(dimensaoCaractere.getAltura()+2) * valor.length;
 		
-		registra(
+		gerenciador.registra(
 				new Moldura(
 						new Posicao(getPosicao().getHorizontal()-1, getPosicao().getVertical()-2),
 						new Dimensao( margemX+2, margemY+2 ),

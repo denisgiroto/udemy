@@ -35,5 +35,5 @@ public abstract class Elemento {
 		return parametros;
 	}
 
-	public abstract String escrever(Parametros parametros);
+	protected abstract String escrever(Parametros parametros);
 }

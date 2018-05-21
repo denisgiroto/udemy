@@ -1,8 +1,8 @@
 package br.com.dsg.zpl.elemento;
 
-import br.com.dsg.zpl.elemento.conversor.ConversorMilimetrosParaPontos;
 import br.com.dsg.zpl.elemento.core.ComandoGeral;
 import br.com.dsg.zpl.elemento.core.Dimensao;
+import br.com.dsg.zpl.elemento.core.GerenciadorElemento;
 import br.com.dsg.zpl.elemento.core.Rotacao;
 import br.com.dsg.zpl.elemento.core.TipoFonte;
 
@@ -52,7 +52,7 @@ public class CampoAlfanumerico extends ComandoSimples {
 	}
 
 	@Override
-	protected void montaCampo() {
+	protected void montaCampo(GerenciadorElemento gerenciador) {
 
 		if (tipoFonte != null && rotacao != null)
 			comandoGeral.comValor(tipoFonte.name() + rotacao.name());
@@ -60,9 +60,9 @@ public class CampoAlfanumerico extends ComandoSimples {
 		if (dimensao != null)
 			comandoGeral.comValor(dimensao);
 		
-		registra(comandoGeral);
+		gerenciador.registra(comandoGeral);
 		
-		registra(
+		gerenciador.registra(
 				new ComandoGeral("^FD")
 				.comValor(this.valor) 
 		);

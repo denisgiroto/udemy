@@ -2,6 +2,7 @@ package br.com.dsg.zpl.elemento;
 
 import br.com.dsg.zpl.elemento.core.ComandoGeral;
 import br.com.dsg.zpl.elemento.core.ElementoComposto;
+import br.com.dsg.zpl.elemento.core.GerenciadorElemento;
 import br.com.dsg.zpl.elemento.core.Parametros;
 
 /**
@@ -27,18 +28,18 @@ public abstract class ComandoSimples extends ElementoComposto{
 	}
 	
 	@Override
-	protected void montaElemento() {
-		registra(posicao);
+	protected void montaElemento(GerenciadorElemento gerenciador) {
+		gerenciador.registra(posicao);
 		
 		if(this.comando!=null) {
 			
-			registra(this.comando);
+			gerenciador.registra(this.comando);
 		}
 		
-		montaCampo();
+		montaCampo(gerenciador);
 	}
 	
-	protected abstract void montaCampo();
+	protected abstract void montaCampo(GerenciadorElemento gerenciador);
 	
 	@Override
 	public String escrever(Parametros parametros) {
