@@ -63,6 +63,16 @@ public class ComandoGeral extends Elemento {
 		return this;
 	}
 	
+	public ComandoGeral comValor(int valor, boolean converterUnidade) {
+		if(valores == null) {
+			this.valores = new ArrayList<Valor>();
+		}
+		
+		this.valores.add(new Valor(valor,converterUnidade));
+		return this;
+	}
+	
+
 	public ComandoGeral comValor(Valor valor) {
 		if(valores == null) {
 			this.valores = new ArrayList<Valor>();

@@ -6,7 +6,6 @@ package br.com.dsg.zpl.elemento.core;
  */
 public abstract class ElementoComposto extends Elemento{
 
-//	private List<Elemento> componentes;
 	
 	private GerenciadorElemento gerenciador = null;
 	
@@ -18,26 +17,9 @@ public abstract class ElementoComposto extends Elemento{
 		super(parametros);
 	}
 
-//	public List<Elemento> getComponentes() {
-//		if (this.componentes == null) {
-//			this.componentes = new ArrayList<Elemento>();
-//			montaElemento();
-//		}
-//		return componentes;
-//	}
 
 	protected abstract void montaElemento(GerenciadorElemento cadastro);
 	
-
-//	public ElementoComposto registra(Elemento componente) {
-//		//System.out.println(this.getClass().getSimpleName()+"::registra(componente) "+componente.getClass().getName());
-//		if(componente!=null) {
-//			componente.setParametro(getParametros());
-//			getComponentes().add(componente);
-//		}
-//		return this;
-//	}
-
 
 	protected String escrever(Parametros parametros) {
 		this.gerenciador = new GerenciadorElemento(parametros);

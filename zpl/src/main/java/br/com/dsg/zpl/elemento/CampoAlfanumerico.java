@@ -62,9 +62,7 @@ public class CampoAlfanumerico extends ComandoSimples {
 		
 		gerenciador.registra(comandoGeral);
 		
-		gerenciador.registra(
-				new ComandoGeral("^FD")
-				.comValor(this.valor) 
+		gerenciador.registra( new Texto (this.valor) 
 		);
 
 	}

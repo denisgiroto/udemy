@@ -11,7 +11,7 @@ public class TestMontar {
 		((Pagina) 
 				ZPLBuilder
 				
-				.novaPagina(UnidadeMedida.MILIMETROS,Densidade.OITO_PONTOS, 99, 110)
+				.novaPagina(UnidadeMedida.MILIMETROS,Densidade.OITO_PONTOS, 379 , 375)
 				.comMargem()
 				.registra(
 					new CaixaTexto(new Posicao(10, 10), 
@@ -22,7 +22,7 @@ public class TestMontar {
 							new Linha(new Dimensao(2, 2), TipoFonte.A, Rotacao.I, "Denis_Silva"),
 							new Linha(new Dimensao(3, 3), TipoFonte.A, Rotacao.B, "Denis_Silva"),
 							new Linha(new Dimensao(3, 3), TipoFonte.A, Rotacao.R, "Denis_Silva"),
-							new Linha(new Dimensao(10, 10), TipoFonte.A, Rotacao.N, "Giroto")
+							new Linha(new Dimensao(12, 12), TipoFonte.A, Rotacao.N, "Giroto")
 							
 							)
 				)
